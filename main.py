@@ -1,5 +1,6 @@
 from button import Button
 from checkbox import CheckBox
+from input_field import InputField
 from paragraph import Paragraph
 from progress_bar import ProgressBar
 from slider import Slider
@@ -25,11 +26,12 @@ def loop():
 How I wonder what you are!\n\
 Up above the world so high\n\
 Like a diamond in the sky!", 500, screen)
-    checkbox = CheckBox(200, 400, 50, screen)
+    checkbox = CheckBox(200, 350, 50, screen)
     progress_bar = ProgressBar(200, 200, 200, 50, screen)
     toggle = Toggle(400, 40, 50, screen)
     splash_text = SplashText("Welcome to Demo of Pygame UI", screen)
-    slider = Slider(500, 500, 300, 30, screen)
+    slider = Slider(500, 200, 300, 30, screen)
+    input_field = InputField(400, 500, 300, 40, screen)
 
     progress_bar.set_vertical()
 
@@ -46,6 +48,7 @@ Like a diamond in the sky!", 500, screen)
         paragraph.render()
         checkbox.render()
         slider.render()
+        input_field.render()
 
         splash_text.render()
 
@@ -56,6 +59,7 @@ Like a diamond in the sky!", 500, screen)
                 mouse_pos = pg.mouse.get_pos()
 
                 button.check_clicked(mouse_pos, event.button)
+                input_field.check_clicked(mouse_pos)
                 toggle.check_clicked(mouse_pos)
                 checkbox.check_clicked(mouse_pos)
 
@@ -76,6 +80,15 @@ Like a diamond in the sky!", 500, screen)
 
             if event.type == pg.MOUSEBUTTONUP:
                 button.check_released(pg.mouse.get_pos(), event.button)
+
+            if event.type == pg.KEYDOWN:
+                if input_field.selected:
+                    if event.key == pg.K_BACKSPACE:
+                        input_field.backspace_text()
+                    elif event.key == pg.K_DELETE:
+                        input_field.delete_text()
+                    else:
+                        input_field.add_text(event.unicode)
 
         pg.display.flip()
 
