@@ -1,8 +1,10 @@
 from button import Button
-from text import Text
+from checkbox import CheckBox
 from paragraph import Paragraph
+from progress_bar import ProgressBar
+from text import Text
 from toggle import Toggle
-from progress_bar import Progress_Bar
+
 import pygame as pg
 
 
@@ -21,8 +23,8 @@ def loop():
 How I wonder what you are!\n\
 Up above the world so high\n\
 Like a diamond in the sky!", 500, screen)
-
-    progress_bar = Progress_Bar(200, 200, 200, 50, screen)
+    checkbox = CheckBox(200, 400, 50, screen)
+    progress_bar = ProgressBar(200, 200, 200, 50, screen)
     toggle = Toggle(400, 40, 50, screen)
 
     progress_bar.set_vertical()
@@ -38,14 +40,17 @@ Like a diamond in the sky!", 500, screen)
         progress_bar.render()
         toggle.render()
         paragraph.render()
+        checkbox.render()
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
             if event.type == pg.MOUSEBUTTONDOWN:
                 mouse_pos = pg.mouse.get_pos()
+
                 button.check_clicked(mouse_pos, event.button)
                 toggle.check_clicked(mouse_pos)
+                checkbox.check_clicked(mouse_pos)
 
                 if button.left_clicked:
                     progress_bar.increase_progress(0.1)

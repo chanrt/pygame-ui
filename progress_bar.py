@@ -1,6 +1,6 @@
 import pygame as pg
 
-class Progress_Bar:
+class ProgressBar:
     def __init__(self, x, y, length, thickness, screen):
         self.x = x
         self.y = y
