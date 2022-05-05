@@ -52,7 +52,6 @@ class ProgressBar:
             self.progress = 0
 
     def make_rects(self):
-        
         if self.orientation == "horizontal":
             self.bg_rect = pg.Rect(self.x - self.length // 2, self.y - self.thickness // 2, self.length, self.thickness)
             self.fg_rect = pg.Rect(self.x - self.length // 2, self.y - self.thickness // 2, self.length * self.progress, self.thickness)

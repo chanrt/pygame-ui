@@ -2,6 +2,8 @@ from button import Button
 from checkbox import CheckBox
 from paragraph import Paragraph
 from progress_bar import ProgressBar
+from slider import Slider
+from splash_text import SplashText
 from text import Text
 from toggle import Toggle
 
@@ -19,13 +21,15 @@ def loop():
     text = Text(400, 100, "An eye for an eye makes the whole world blind",
                 screen)
     paragraph = Paragraph(
-        400, 400, "Twinkle Twinkle Little Star\n\
+        400, 300, "Twinkle Twinkle Little Star\n\
 How I wonder what you are!\n\
 Up above the world so high\n\
 Like a diamond in the sky!", 500, screen)
     checkbox = CheckBox(200, 400, 50, screen)
     progress_bar = ProgressBar(200, 200, 200, 50, screen)
     toggle = Toggle(400, 40, 50, screen)
+    splash_text = SplashText("Welcome to Demo of Pygame UI", screen)
+    slider = Slider(500, 500, 300, 30, screen)
 
     progress_bar.set_vertical()
 
@@ -41,6 +45,9 @@ Like a diamond in the sky!", 500, screen)
         toggle.render()
         paragraph.render()
         checkbox.render()
+        slider.render()
+
+        splash_text.render()
 
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -51,6 +58,11 @@ Like a diamond in the sky!", 500, screen)
                 button.check_clicked(mouse_pos, event.button)
                 toggle.check_clicked(mouse_pos)
                 checkbox.check_clicked(mouse_pos)
+
+                if splash_text.display == True:
+                    splash_text.clicked()
+
+                slider.check_clicked(mouse_pos)
 
                 if button.left_clicked:
                     progress_bar.increase_progress(0.1)
